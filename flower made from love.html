@@ -61,9 +61,7 @@
             text-decoration: none;
         }
 
-        .logo span {
-            color: var(--brand-pink);
-        }
+        .logo span { color: var(--brand-pink); }
 
         .nav-links {
             display: flex;
@@ -80,9 +78,7 @@
             transition: var(--transition);
         }
 
-        .nav-links a:hover {
-            color: var(--text-dark);
-        }
+        .nav-links a:hover { color: var(--text-dark); }
 
         .cart-icon-btn {
             background-color: var(--text-dark);
@@ -95,9 +91,7 @@
             border-radius: var(--radius-smooth);
             transition: var(--transition);
         }
-        .cart-icon-btn:hover { 
-            background-color: var(--brand-pink);
-        }
+        .cart-icon-btn:hover { background-color: var(--brand-pink); }
 
         /* Hero Section */
         .hero {
@@ -187,7 +181,7 @@
 
         /* Layout Structure */
         .section-container { padding: 90px 8%; }
-        
+         
         .bg-pastel-section {
             background-color: var(--pastel-blue);
             border-top: 1px solid var(--border-color);
@@ -212,6 +206,15 @@
             gap: 50px;
         }
 
+        @media (max-width: 968px) {
+            .hero { grid-template-columns: 1fr; text-align: center; padding: 60px 5%; gap: 30px; }
+            .hero-content { text-align: center; }
+            .hero-content h1 { font-size: 40px; }
+            .hero-image-side { height: 450px; }
+            .preorder-box { grid-template-columns: 1fr; padding: 25px; gap: 30px; }
+            .preview-grid { grid-template-columns: 1fr !important; }
+        }
+
         .preorder-img-side {
             background-color: var(--pastel-pink);
             border-radius: var(--radius-smooth);
@@ -227,8 +230,7 @@
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: var(--text-muted); }
         
-        /* แก้ปัญหากล่อง Input/Select ตัวหนังสืออ่านยากและโดนบีบ */
-        .form-group select, .form-group input { 
+        .form-group input[type="number"] { 
             width: 100%; 
             padding: 12px 16px; 
             border: 1px solid var(--border-color); 
@@ -239,9 +241,70 @@
             border-radius: 8px; 
             transition: var(--transition); 
         }
-        .form-group select:focus, .form-group input:focus { border-color: var(--text-dark); }
+        .form-group input[type="number"]:focus { border-color: var(--text-dark); }
 
-        /* อัปเดตส่วนแสดงภาพตัวเลือกกระดาษและริบบิ้นในหน้าสั่งซื้อ */
+        .form-group select { 
+            width: 100%; 
+            padding: 12px 16px; 
+            border: 1px solid var(--border-color); 
+            background: var(--white); 
+            outline: none; 
+            font-size: 14px; 
+            color: var(--text-dark); 
+            border-radius: 8px; 
+            transition: var(--transition); 
+        }
+        .form-group select:focus { border-color: var(--text-dark); }
+
+        /* ส่วนเลือกช่องทางชำระเงิน */
+        .payment-options {
+            display: flex;
+            gap: 12px;
+            margin-top: 4px;
+        }
+        .payment-label {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            color: var(--text-dark) !important;
+            background: var(--white);
+            transition: var(--transition);
+        }
+        .payment-label input[type="radio"] {
+            width: auto;
+            margin: 0;
+            cursor: pointer;
+        }
+        .payment-label:has(input[type="radio"]:checked) {
+            border-color: var(--text-dark);
+            background-color: var(--pastel-blue);
+        }
+
+        /* ป้ายส่งฟรีแบบไดนามิก */
+        .shipping-badge {
+            display: inline-block;
+            font-size: 11px;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-left: 8px;
+            vertical-align: middle;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .shipping-badge.show { opacity: 1; }
+
+        /* แคตตาล็อกกระดาษและริบบิ้น */
         .options-preview-container {
             grid-column: span 2;
             border-top: 1px solid var(--border-color);
@@ -289,9 +352,7 @@
             object-fit: cover;
             transition: var(--transition);
         }
-        .preview-img-wrapper:hover img {
-            transform: scale(1.05);
-        }
+        .preview-img-wrapper:hover img { transform: scale(1.05); }
         .preview-img-wrapper::after {
             content: '\f00e';
             font-family: 'Font Awesome 6 Free';
@@ -307,11 +368,9 @@
             opacity: 0;
             transition: var(--transition);
         }
-        .preview-img-wrapper:hover::after {
-            opacity: 1;
-        }
+        .preview-img-wrapper:hover::after { opacity: 1; }
 
-        /* Lightbox โหมดซูมดูรูปภาพแบบโมเดิร์น */
+        /* Lightbox ส่องรูปขยายใหญ่ */
         .lightbox {
             position: fixed;
             top: 0; left: 0;
@@ -325,10 +384,7 @@
             pointer-events: none;
             transition: var(--transition);
         }
-        .lightbox.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .lightbox.active { opacity: 1; pointer-events: auto; }
         .lightbox img {
             max-width: 90%;
             max-height: 85vh;
@@ -337,9 +393,7 @@
             transform: scale(0.95);
             transition: var(--transition);
         }
-        .lightbox.active img {
-            transform: scale(1);
-        }
+        .lightbox.active img { transform: scale(1); }
         .lightbox-close {
             position: absolute;
             top: 25px; right: 35px;
@@ -352,7 +406,7 @@
 
         .price-display { margin: 25px 0; border-top: 1px solid var(--border-color); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; }
         .price-display span { font-size: 14px; color: var(--text-muted); font-weight: 500; }
-        .price-display .price-amount { font-size: 18px; color: var(--brand-pink); font-weight: 600; }
+        .price-display .price-amount { font-family: 'Inter', sans-serif; font-size: 32px; color: var(--text-dark); font-weight: 700; }
 
         .btn-submit {
             width: 100%;
@@ -430,26 +484,41 @@
         .info-box li { margin-bottom: 15px; font-size: 14px; color: var(--text-muted); line-height: 1.6; padding-left: 20px; position: relative; }
         .info-box li::before { content: "•"; color: var(--brand-pink); font-weight: bold; font-size: 18px; position: absolute; left: 0; top: -2px; }
 
-        /* Sidebar Cart (ปรับปรุงให้รองรับจอแนวตั้ง ปุ่มไม่จมไม่หลุดจอ) */
+        /* Sidebar Cart */
         .cart-sidebar {
             position: fixed;
             top: 0; right: -450px;
-            width: 420px; max-width: 100%; height: 100%;
+            width: 420px; height: 100%;
             background-color: var(--white);
             box-shadow: -10px 0 30px rgba(0,0,0,0.05);
             z-index: 2000;
             transition: var(--transition);
-            padding: 30px;
+            padding: 40px;
             display: flex;
             flex-direction: column;
             border-left: 1px solid var(--border-color);
         }
         .cart-sidebar.open { right: 0; }
-        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 20px; }
-        .close-cart { background: none; border: none; font-size: 28px; cursor: pointer; color: var(--text-dark); padding: 5px; }
-        .cart-items-list { flex: 1; overflow-y: auto; margin-bottom: 20px; }
-        .cart-item { padding: 15px 0; border-bottom: 1px solid var(--border-color); font-size: 14px; }
-        .remove-item { color: #E63946; cursor: pointer; background: none; border: none; font-size: 12px; margin-top: 8px;}
+        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px; }
+        .close-cart { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-dark); }
+        .cart-items-list { flex: 1; overflow-y: auto; }
+        
+        .cart-item { padding: 18px 0; border-bottom: 1px solid var(--border-color); font-size: 14px; }
+        .deposit-info-box {
+            background-color: var(--pastel-pink);
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin: 10px 0;
+            border: 1px dashed var(--brand-pink);
+        }
+        .deposit-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+        .deposit-row:last-child { margin-bottom: 0; }
+        .remove-item { color: #E63946; cursor: pointer; background: none; border: none; font-size: 12px; margin-top: 8px; font-weight: 500;}
 
         .checkout-btn {
             width: 100%;
@@ -467,20 +536,9 @@
 
         footer { background-color: var(--white); padding: 60px 8% 40px 8%; text-align: center; border-top: 1px solid var(--border-color); }
         .footer-logo { font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark); }
+        .footer-logo span { color: var(--brand-pink); }
         .instagram-tag { font-size: 14px; color: var(--text-muted); text-decoration: none; font-weight: 500; transition: var(--transition); }
         .instagram-tag:hover { color: var(--brand-pink); }
-
-        /* Media Queries เพิ่มเติมเพื่อความละเอียดทุกขนาดหน้าจอ */
-        @media (max-width: 968px) {
-            .hero { grid-template-columns: 1fr; text-align: center; padding: 60px 5%; gap: 30px; }
-            .hero-content { text-align: center; }
-            .hero-content h1 { font-size: 38px; }
-            .hero-image-side { height: 400px; }
-            .preorder-box { grid-template-columns: 1fr; padding: 25px; gap: 30px; }
-            .preview-grid { grid-template-columns: 1fr; }
-            .info-section { grid-template-columns: 1fr; gap: 20px; padding: 40px 5%; }
-            .nav-links { display: none; } /* ซ่อนเมนูขนาดยาวบนมือถือเพื่อป้องการปุ่มล้นเบียดกัน */
-        }
     </style>
 </head>
 <body>
@@ -493,14 +551,7 @@
             <li><a href="#info-section">Delivery Info</a></li>
             <li><button class="cart-icon-btn" onclick="toggleCart()"><i class="fa-solid fa-shopping-bag" style="margin-right: 8px;"></i>Order List [<span id="cart-count">0</span>]</button></li>
         </ul>
-        <button class="cart-icon-btn mobile-cart-btn" onclick="toggleCart()" style="display: none;"><i class="fa-solid fa-shopping-bag"></i> [<span id="cart-count-mob">0</span>]</button>
     </nav>
-
-    <style>
-        @media (max-width: 968px) {
-            .mobile-cart-btn { display: block !important; padding: 8px 14px; }
-        }
-    </style>
 
     <section class="hero">
         <div class="hero-content">
@@ -517,7 +568,7 @@
     <section class="section-container" id="preorder-section">
         <div class="section-header">
             <h2>Pre-Order Packages</h2>
-            <p>เลือกจัดเซ็ตพรีออเดอร์ตามจำนวนดอกและวัสดุที่คุณต้องการเพื่อประเมินราคามาตรฐาน</p>
+            <p>ระบุจำนวนดอกไม้และเลือกวัสดุที่คุณต้องการเพื่อประเมินราคาพรีออเดอร์ได้ทันที</p>
         </div>
 
         <div class="preorder-box">
@@ -526,19 +577,18 @@
             </div>
             <div class="preorder-form">
                 <h3>Configure Order</h3>
-                
+
                 <div class="form-group">
-                    <label>ระบุจำนวนดอกไม้ที่ต้องการสั่งซื้อ (ระบุตัวเลข)</label>
-                    <input type="number" id="quantity-input" min="1" value="1" placeholder="พิมพ์จำนวนดอกไม้ เช่น 5">
+                    <label>จำนวนดอกไม้ที่ต้องการสั่งทำ <span id="free-shipping-tag" class="shipping-badge">ส่งฟรี!</span></label>
+                    <input type="number" id="quantity-input" value="1" min="1" step="1" oninput="calculatePrice()">
                 </div>
 
                 <div class="form-group">
-                    <label>เลือกแบบที่ต้องการ</label>
+                    <label>แบบดอกไม้</label>
                     <select id="style-select">
                         <option value="แบบที่ 1">แบบที่ 1</option>
                         <option value="แบบที่ 2">แบบที่ 2</option>
                         <option value="แบบที่ 3">แบบที่ 3</option>
-                        <option value="แบบที่ 4">แบบที่ 4</option>
                     </select>
                 </div>
 
@@ -561,9 +611,23 @@
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label>ช่องทางการชำระเงิน</label>
+                    <div class="payment-options">
+                        <label class="payment-label">
+                            <input type="radio" name="payment-channel" value="PromptPay" checked>
+                            <i class="fa-solid fa-qrcode" style="color: #00779b;"></i> PromptPay
+                        </label>
+                        <label class="payment-label">
+                            <input type="radio" name="payment-channel" value="เงินสด">
+                            <i class="fa-solid fa-money-bill-wave" style="color: #2b9348;"></i> เงินสด
+                        </label>
+                    </div>
+                </div>
+
                 <div class="price-display">
                     <span>Estimated Total:</span>
-                    <span class="price-amount" id="total-amount-view" style="font-size: 15px;">สรุปราคาทางแชท</span>
+                    <span class="price-amount" id="total-amount-view">29 ฿</span>
                 </div>
 
                 <button class="btn-submit" onclick="addPreorderToCart()">Add To Order List</button>
@@ -676,7 +740,35 @@
             document.getElementById('cart-sidebar').classList.toggle('open');
         }
 
-        // ระบบสั่งเปิด-ปิด Lightbox ซูมรูปภาพเดิมเก็บไว้ครบถ้วน
+        function getCalculatedPrice(count) {
+            if (count <= 0) return 0;
+            if (count === 1) return 29;
+            if (count === 2) return 58;
+            if (count >= 3 && count < 5) return Math.round(count * 29.66); 
+            if (count >= 5 && count < 7) return Math.round(count * 29.40); 
+            if (count >= 7 && count < 12) return Math.round(count * 29.28); 
+            return Math.round(count * 29.16); 
+        }
+
+        function calculatePrice() {
+            const inputEl = document.getElementById('quantity-input');
+            let count = parseInt(inputEl.value);
+            
+            if (isNaN(count) || count < 1) {
+                count = 1;
+            }
+
+            const totalPrice = getCalculatedPrice(count);
+            document.getElementById('total-amount-view').innerText = totalPrice + " ฿";
+
+            const shippingTag = document.getElementById('free-shipping-tag');
+            if (count >= 12) {
+                shippingTag.classList.add('show');
+            } else {
+                shippingTag.classList.remove('show');
+            }
+        }
+
         function openLightbox(url) {
             const lightbox = document.getElementById('image-lightbox');
             const img = document.getElementById('lightbox-img');
@@ -689,22 +781,38 @@
         }
 
         function addPreorderToCart() {
-            const qtyInput = document.getElementById('quantity-input');
-            const count = qtyInput.value ? parseInt(qtyInput.value) : 1;
-            const style = document.getElementById('style-select').value;
-            const wrap = document.getElementById('wrap-select').value;
-            const ribbon = document.getElementById('ribbon-select').value;
+            const inputEl = document.getElementById('quantity-input');
+            let count = parseInt(inputEl.value);
 
-            if (count < 1) {
-                alert('กรุณาระบุจำนวนดอกไม้ให้ถูกต้องอย่างน้อย 1 ดอกค่ะ');
+            if (isNaN(count) || count < 1) {
+                alert('รบกวนระบุจำนวนดอกไม้ให้ถูกต้องด้วยนะคะ');
                 return;
             }
 
+            const price = getCalculatedPrice(count);
+            const style = document.getElementById('style-select').value;
+            const wrap = document.getElementById('wrap-select').value;
+            const ribbon = document.getElementById('ribbon-select').value;
+            const paymentChannel = document.querySelector('input[name="payment-channel"]:checked').value;
+
+            let depositPrice = 0;
+            let remainingPrice = price;
+
+            if (count > 1) {
+                depositPrice = Math.round(price / 2);
+                remainingPrice = price - depositPrice;
+            }
+
             const item = {
-                name: `พรีออเดอร์ดอกไม้ [${style}]`,
+                name: `แพ็กเกจพรีออเดอร์ ดอกไม้ ${count} ดอก`,
                 count: count,
+                price: price,
+                style: style,
+                depositPrice: depositPrice,
+                remainingPrice: remainingPrice,
                 wrap: wrap,
                 ribbon: ribbon,
+                paymentChannel: paymentChannel,
                 id: Date.now()
             };
 
@@ -719,10 +827,7 @@
         }
 
         function updateCartUI() {
-            // อัปเดตจำนวนตัวเลขบนปุ่มตะกร้าทั้งของคอมพิวเตอร์และมือถือ
             document.getElementById('cart-count').innerText = cart.length;
-            document.getElementById('cart-count-mob').innerText = cart.length;
-            
             const container = document.getElementById('cart-items-list');
             container.innerHTML = '';
 
@@ -734,11 +839,35 @@
             cart.forEach(item => {
                 const el = document.createElement('div');
                 el.classList.add('cart-item');
+                
+                let depositHtml = '';
+                if (item.count === 1) {
+                    depositHtml = `
+                        <div class="deposit-info-box" style="border-color: #90E0EF; background-color: var(--pastel-blue);">
+                            <div class="deposit-row"><span>ราคารวมทั้งหมด:</span><strong>${item.price} ฿</strong></div>
+                            <div class="deposit-row" style="color: #2b9348;"><span>มัดจำ:</span><strong>ไม่ต้องมัดจำ (จ่ายเต็มตอนรับของ)</strong></div>
+                        </div>
+                    `;
+                } else {
+                    depositHtml = `
+                        <div class="deposit-info-box">
+                            <div class="deposit-row"><span>ราคารวมทั้งหมด:</span><strong>${item.price} ฿</strong></div>
+                            <div class="deposit-row" style="color: #E63946;"><span>มัดจำ (50%):</span><strong>${item.depositPrice} ฿</strong></div>
+                            <div class="deposit-row" style="color: var(--text-muted);"><span>ค้างจ่ายตอนรับของ:</span><strong>${item.remainingPrice} ฿</strong></div>
+                        </div>
+                    `;
+                }
+
+                // ปรับหน้า UI สรุปรายการ เรียงจำนวนดอกไม้ขึ้นเป็นหัวข้อหลัก
                 el.innerHTML = `
-                    <strong style="font-weight: 500;">${item.name}</strong>
-                    <div style="font-size:12px; color:var(--text-muted); margin: 6px 0;">จำนวน: ${item.count} ดอก | ห่อ: ${item.wrap} | โบว์: ${item.ribbon}</div>
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <span style="font-weight:600; font-size:13px; color:var(--brand-pink);">ราคา: รอสรุปในแชท</span>
+                    <strong style="font-weight: 500; color: var(--text-dark);">${item.name}</strong>
+                    <div style="font-size:12px; color:var(--text-muted); margin: 4px 0 2px 0;">แบบดอกไม้: ${item.style}</div>
+                    <div style="font-size:12px; color:var(--text-muted); margin-bottom: 4px;">ห่อ: ${item.wrap} | โบว์: ${item.ribbon}</div>
+                    <div style="font-size:12px; color:var(--text-dark); font-weight:500; margin-bottom: 8px;"><i class="fa-solid fa-credit-card"></i> ช่องทาง: ${item.paymentChannel}</div>
+                    
+                    ${depositHtml}
+
+                    <div style="text-align: right;">
                         <button class="remove-item" onclick="removeFromCart(${item.id})">ลบออก</button>
                     </div>
                 `;
@@ -748,17 +877,32 @@
 
         function checkoutToInstagram() {
             if(cart.length === 0) {
-                alert('ยังไม่มีรายการพรีออเดอร์คัดเลือกไว้ครับ/ค่ะ');
+                alert('ยังไม่มีรายการพรีออเดอร์คัดเลือกไว้ค่ะ');
                 return;
             }
-            let text = "สวัสดีค่ะ สนใจพรีออเดอร์ดอกไม้ตามรายการนี้ครับ/ค่ะ:\n\n";
+            
+            let text = "สวัสดีครับ/ค่ะ สนใจพรีออเดอร์ดอกไม้ออเดอร์ตามนี้เลยครับ/ค่ะ:\n\n";
+
             cart.forEach((item, i) => {
-                text += `${i+1}. ${item.name}\n   [จำนวน: ${item.count} ดอก | วัสดุห่อ: ${item.wrap} | โบว์: ${item.ribbon}]\n`;
+                // ตัวฟอร์มข้อความส่ง DM: เรียงเอาจำนวนดอกไม้ขึ้นก่อน แล้วตามด้วย [แบบดอกไม้ | วัสดุห่อ | โบว์]
+                text += `${i+1}. แพ็กเกจพรีออเดอร์ ดอกไม้ ${item.count} ดอก\n`;
+                text += `   [แบบดอกไม้: ${item.style} | วัสดุห่อ: ${item.wrap} | โบว์: ${item.ribbon}]\n`;
+                text += `   - ราคารวม: ${item.price}฿\n`;
+                
+                if (item.count === 1) {
+                    text += `   - ยอดมัดจำ: ไม่ต้องมัดจำ จ่ายเต็มตอนรับของ\n`;
+                } else {
+                    text += `   - ยอดมัดจำ 50% ที่พร้อมโอน: ${item.depositPrice}฿\n`;
+                    text += `   - ยอดค้างชำระตอนรับของ: ${item.remainingPrice}฿\n`;
+                }
+                
+                text += `   (เลือกชำระแบบ: ${item.paymentChannel})\n\n`;
             });
-            text += "\nขอราคาและข้อความสรุปการสั่งซื้อหน่อยครับ/ค่ะ";
+            
+            text += "รบกวนส่ง QR code สำหรับชำระเงินให้หน่อยนะครับ/คะ";
             
             navigator.clipboard.writeText(text).then(() => {
-                alert('คัดลอกรายละเอียดข้อมูลพรีออเดอร์เรียบร้อย! ระบบจะพาคุณไปยังหน้า DM Instagram เพื่อวางข้อความและสั่งซื้อครับ/ค่ะ');
+                alert('คัดลอกรายละเอียดข้อมูลตามลำดับที่ต้องการสำเร็จ! ระบบจะพาท่านไปยังหน้า DM Instagram ทันทีครับ');
                 window.open('https://instagram.com/paper.flo.wers', '_blank');
             });
         }
