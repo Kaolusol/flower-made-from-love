@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Flowers | Premium Handmade Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --pastel-pink: #FFF0F3;       
+            --pastel-blue: #EAF4F8;       
+            --brand-pink: #FFAABC;        
+            --brand-blue: #90E0EF;        
+            --text-dark: #1A1D20;         
+            --text-muted: #5A626A;        
+            --white: #FFFFFF;
+            --border-color: #E9ECEF;
+            --radius-smooth: 12px;        
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Modern Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-family: 'Inter', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--brand-pink);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-dark);
+        }
+
+        .cart-icon-btn {
+            background-color: var(--text-dark);
+            border: none;
+            padding: 10px 22px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--white);
+            cursor: pointer;
+            border-radius: var(--radius-smooth);
+            transition: var(--transition);
+        }
+        .cart-icon-btn:hover { 
+            background-color: var(--brand-pink);
+        }
+
+        /* Hero Section (Split Layout for Portrait Image & Left-aligned Text) */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            min-height: 80vh;
+            padding: 40px 8%;
+            background: linear-gradient(135deg, var(--pastel-pink) 0%, var(--pastel-blue) 100%);
+            gap: 50px;
+        }
+
+        .hero-content { 
+            text-align: left;
+            animation: heroFadeUp 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero-image-side {
+            width: 100%;
+            height: 580px;
+            border-radius: var(--radius-smooth);
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+            border: 4px solid var(--white);
+            animation: heroFadeUp 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero-image-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        @keyframes heroFadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 { 
+            font-family: 'Inter', 'Prompt', sans-serif; 
+            font-size: 52px; 
+            font-weight: 700; 
+            letter-spacing: -1.5px; 
+            line-height: 1.15; 
+            margin-bottom: 20px; 
+            color: var(--text-dark);
+        }
+        .hero-content h1 span { color: var(--brand-pink); }
+        .hero-content p { font-size: 16px; color: var(--text-muted); margin-bottom: 35px; line-height: 1.6; }
+
+        .tag-preorder {
+            display: inline-block;
+            padding: 6px 14px;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            border-radius: var(--radius-smooth);
+        }
+
+        .btn-hero-action {
+            display: inline-block;
+            padding: 14px 28px;
+            background-color: var(--text-dark);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: var(--radius-smooth);
+            transition: var(--transition);
+        }
+        .btn-hero-action:hover {
+            background-color: var(--brand-pink);
+            transform: translateY(-2px);
+        }
+
+        /* Layout Structure */
+        .section-container { padding: 90px 8%; }
+        
+        .bg-pastel-section {
+            background-color: var(--pastel-blue);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 32px; font-weight: 600; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .section-header p { color: var(--text-muted); font-size: 15px; }
+
+        /* Pre-order Configurator Box */
+        .preorder-box {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius-smooth);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        @media (max-width: 968px) {
+            .hero { grid-template-columns: 1fr; text-align: center; padding: 60px 5%; gap: 30px; }
+            .hero-content { text-align: center; }
+            .hero-content h1 { font-size: 40px; }
+            .hero-image-side { height: 450px; }
+            .preorder-box { grid-template-columns: 1fr; padding: 25px; gap: 30px; }
+        }
+
+        .preorder-img-side {
+            background-color: var(--pastel-pink);
+            border-radius: var(--radius-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            min-height: 350px;
+        }
+        .preorder-img-side img { width: 100%; height: 100%; object-fit: cover; }
+
+        .preorder-form h3 { font-size: 22px; font-weight: 600; margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: var(--text-muted); }
+        .form-group select { 
+            width: 100%; 
+            padding: 12px 16px; 
+            border: 1px solid var(--border-color); 
+            background: var(--white); 
+            outline: none; 
+            font-size: 14px; 
+            color: var(--text-dark); 
+            border-radius: 8px; 
+            transition: var(--transition); 
+        }
+        .form-group select:focus { border-color: var(--text-dark); }
+
+        .price-display { margin: 25px 0; border-top: 1px solid var(--border-color); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .price-display span { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+        .price-display .price-amount { font-family: 'Inter', sans-serif; font-size: 32px; color: var(--text-dark); font-weight: 700; }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--text-dark);
+            color: var(--white);
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        .btn-submit:hover { background-color: var(--brand-pink); }
+
+        /* Custom Card Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+            border-radius: var(--radius-smooth);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.04); }
+
+        .product-img-box { width: 100%; height: 420px; background-color: var(--pastel-pink); position: relative; overflow: hidden; }
+        .product-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .badge-custom {
+            position: absolute;
+            top: 20px; left: 20px;
+            background-color: var(--white);
+            color: var(--text-dark);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            text-transform: uppercase;
+        }
+
+        .product-info { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-info h3 { font-size: 20px; font-weight: 600; margin-bottom: 10px; }
+        .product-info p { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; line-height: 1.5; flex-grow: 1; }
+        
+        .btn-outline-studio {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--text-dark);
+            background-color: transparent;
+            color: var(--text-dark);
+            text-align: center;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        .btn-outline-studio:hover { background-color: var(--text-dark); color: var(--white); }
+
+        /* Trust Info */
+        .info-section { padding: 80px 8%; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; background-color: var(--white); border-top: 1px solid var(--border-color); }
+        .info-box { background: var(--white); padding: 40px; border-radius: var(--radius-smooth); border: 1px solid var(--border-color); }
+        .info-box h3 { font-size: 20px; font-weight: 600; margin-bottom: 20px; color: var(--text-dark); }
+        .info-box ul { list-style: none; }
+        .info-box li { margin-bottom: 15px; font-size: 14px; color: var(--text-muted); line-height: 1.6; padding-left: 20px; position: relative; }
+        .info-box li::before { content: "•"; color: var(--brand-pink); font-weight: bold; font-size: 18px; position: absolute; left: 0; top: -2px; }
+
+        /* Sidebar Cart */
+        .cart-sidebar {
+            position: fixed;
+            top: 0; right: -450px;
+            width: 420px; height: 100%;
+            background-color: var(--white);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+            z-index: 2000;
+            transition: var(--transition);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border-color);
+        }
+        .cart-sidebar.open { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px; }
+        .close-cart { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-dark); }
+        .cart-items-list { flex: 1; overflow-y: auto; }
+        .cart-item { padding: 15px 0; border-bottom: 1px solid var(--border-color); font-size: 14px; }
+        .remove-item { color: #E63946; cursor: pointer; background: none; border: none; font-size: 12px; margin-top: 8px;}
+
+        .checkout-btn {
+            width: 100%;
+            background-color: var(--text-dark);
+            color: var(--white);
+            border: none;
+            padding: 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        .checkout-btn:hover { background-color: var(--brand-pink); }
+
+        footer { background-color: var(--white); padding: 60px 8% 40px 8%; text-align: center; border-top: 1px solid var(--border-color); }
+        .footer-logo { font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark); }
+        .instagram-tag { font-size: 14px; color: var(--text-muted); text-decoration: none; font-weight: 500; transition: var(--transition); }
+        .instagram-tag:hover { color: var(--brand-pink); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">Paper<span>flowers</span></a>
+        <ul class="nav-links">
+            <li><a href="#preorder-section">Pre-Order Rates</a></li>
+            <li><a href="#custom-section">Bespoke Custom</a></li>
+            <li><a href="#info-section">Delivery Info</a></li>
+            <li><button class="cart-icon-btn" onclick="toggleCart()"><i class="fa-solid fa-shopping-bag" style="margin-right: 8px;"></i>Order List [<span id="cart-count">0</span>]</button></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="tag-preorder">100% Pre-Order Studio</span>
+            <h1>The flowers made <br>from <span>love...</span></h1>
+            <p>สตูดิโอดอกไม้และช่อดาวกระดาษแฮนด์เมด รังสรรค์งานตามออเดอร์อย่างประณีตแบบชิ้นต่อชิ้น มั่นใจในคุณภาพงานคราฟต์เพื่อส่งมอบความรู้สึกดี ๆ ในทุกโอกาสสำคัญของคุณ</p>
+            <a href="#preorder-section" class="btn-hero-action">View Packages</a>
+        </div>
+        <div class="hero-image-side">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='700' viewBox='0 0 500 700'><rect width='100%' height='100%' fill='%23FFF0F3'/><text x='50%' y='50%' font-family='sans-serif' font-size='20' fill='%23FFAABC' text-anchor='middle'>[ Hero Portrait Image ]</text></svg>" alt="Featured Bouquet">
+        </div>
+    </section>
+
+    <section class="section-container" id="preorder-section">
+        <div class="section-header">
+            <h2>Pre-Order Packages</h2>
+            <p>เลือกจัดเซ็ตพรีออเดอร์ตามจำนวนดอกและวัสดุที่คุณต้องการเพื่อประเมินราคามาตรฐาน</p>
+        </div>
+
+        <div class="preorder-box">
+            <div class="preorder-img-side">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><rect width='100%' height='100%' fill='%23EAF4F8'/><text x='50%' y='50%' font-family='sans-serif' font-size='16' fill='%2390E0EF' text-anchor='middle'>[ Package Image ]</text></svg>" alt="Preorder Package">
+            </div>
+            <div class="preorder-form">
+                <h3>Configure Order</h3>
+                
+                <div class="form-group">
+                    <label>จำนวนดอกไม้</label>
+                    <select id="quantity-select" onchange="calculatePrice()">
+                        <option value="29" data-count="1">1 ดอก — 29 ฿</option>
+                        <option value="89" data-count="3">3 ดอก — 89 ฿</option>
+                        <option value="147" data-count="5">5 ดอก — 147 ฿</option>
+                        <option value="205" data-count="7">7 ดอก — 205 ฿</option>
+                        <option value="350" data-count="12">12 ดอก — 350 ฿ (ส่งฟรี)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>ประเภทกระดาษห่อ</label>
+                    <select id="wrap-select">
+                        <option>กระดาษสีธรรมดา</option>
+                        <option>กระดาษสาสำหรับห่อ</option>
+                        <option>กระดาษห่อดอกไม้ธรรมดา</option>
+                        <option>กระดาษห่อดอกไม้ขอบทอง</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>ประเภทโบว์ริบบิ้น</label>
+                    <select id="ribbon-select">
+                        <option>ริบบิ้นผ้าแก้ว</option>
+                        <option>ริบบิ้นผ้าซาติน</option>
+                        <option>ริบบิ้นผ้าซาตินเส้นเล็ก</option>
+                    </select>
+                </div>
+
+                <div class="price-display">
+                    <span>Estimated Total:</span>
+                    <span class="price-amount" id="total-amount-view">29 ฿</span>
+                </div>
+
+                <button class="btn-submit" onclick="addPreorderToCart()">Add To Order List</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-container bg-pastel-section" id="custom-section">
+        <div class="section-header">
+            <h2>Bespoke Custom Bouquets</h2>
+            <p>ผลงานช่อดาวและช่อขนาดใหญ่ตกแต่งพิเศษ ทุกชิ้นเป็นงาน Custom สั่งทำเฉพาะบุคคล</p>
+        </div>
+
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img-box">
+                    <span class="badge-custom">Custom Design</span>
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='500' viewBox='0 0 400 500'><rect width='100%' height='100%' fill='%23FFF0F3'/><text x='50%' y='50%' font-family='sans-serif' font-size='16' fill='%23FFAABC' text-anchor='middle'>[ Custom Pink Star Image ]</text></svg>" alt="ช่อดาวพรีเมียมสีชมพู">
+                </div>
+                <div class="product-info">
+                    <h3>ช่อดาวพรีเมียมสีชมพู-เงิน</h3>
+                    <p>งานดีไซน์ช่อดาวกลิตเตอร์สะท้อนแสงประดับโบว์ริบบิ้นผ้าแก้วเนื้อละเอียดเพื่อความโดดเด่น</p>
+                    <a href="https://instagram.com/paper.flo.wers" target="_blank" class="btn-outline-studio">Inquire via DM (เริ่มต้น 219 ฿)</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-box">
+                    <span class="badge-custom">Custom Design</span>
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='500' viewBox='0 0 400 500'><rect width='100%' height='100%' fill='%23EAF4F8'/><text x='50%' y='50%' font-family='sans-serif' font-size='16' fill='%2390E0EF' text-anchor='middle'>[ Custom Galaxy Star Image ]</text></svg>" alt="ช่อดาว Galaxy">
+                </div>
+                <div class="product-info">
+                    <h3>ช่อดาว Galaxy ม่วง-ดำ</h3>
+                    <p>คุมโทนสีดูลึกลับมีเสน่ห์ ห่อด้วยกระดาษเทคนิคพิเศษตัดขอบทองหรูหราสไตล์โมเดิร์น</p>
+                    <a href="https://instagram.com/paper.flo.wers" target="_blank" class="btn-outline-studio">Inquire via DM (เริ่มต้น 450 ฿)</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section" id="info-section">
+        <div class="info-box">
+            <h3>Studio Guidelines</h3>
+            <ul>
+                <li>ชิ้นงานทั้งหมดเป็นงานฝีมือ สตูดิโอจึงรับเฉพาะยอดสั่งทำล่วงหน้า (Pre-order) เท่านั้น ไม่มีสินค้าพร้อมส่ง</li>
+                <li>ราคางานพรีออเดอร์แบบนับดอกอาจมีการเปลี่ยนแปลงตามราคาทุนของวัสดุในแต่ละช่วงเวลา</li>
+                <li>สำหรับงานช่อดีไซน์พิเศษ (Custom) สามารถส่งภาพเรฟเฟอเรนซ์มาให้ประเมินราคาก่อนได้ทาง DM</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3>Pickup & Shipping</h3>
+            <ul>
+                <li><strong>จุดนัดรับฟรี (ช่วงเปิดภาคเรียน):</strong> โรงเรียนปรินส์รอยแยลส์วิทยาลัย / โรงเรียนดาราวิทยาลัย</li>
+                <li><strong>จุดนัดรับฟรี (ในเมืองเชียงใหม่):</strong> ร้านอาหารเอกทิพย์โชคดี / ห้างสรรพสินค้า MAYA</li>
+                <li><strong>บริการจัดส่งทั่วประเทศ:</strong> จัดส่งผ่าน Flash Express บรรจุลงกล่องหนาและห่อกันกระแทกอย่างแน่นหนา</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Order Summary</h3>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-items-list" id="cart-items-list">
+            <p style="text-align: center; color: var(--text-muted); margin-top: 40px;">ไม่มีรายการพรีออเดอร์ในตะกร้า</p>
+        </div>
+        <div class="cart-footer">
+            <button class="checkout-btn" onclick="checkoutToInstagram()">Copy Info & Order via DM</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">Paper<span>flowers</span></div>
+        <p style="margin-bottom: 20px; font-size: 14px; color: var(--text-muted);">The flowers made from love...</p>
+        <a href="https://instagram.com/paper.flo.wers" target="_blank" class="instagram-tag">Instagram: @paper.flo.wers</a>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('open');
+        }
+
+        function calculatePrice() {
+            const price = document.getElementById('quantity-select').value;
+            document.getElementById('total-amount-view').innerText = price + " ฿";
+        }
+
+        function addPreorderToCart() {
+            const selectEl = document.getElementById('quantity-select');
+            const price = parseInt(selectEl.value);
+            const count = selectEl.options[selectEl.selectedIndex].getAttribute('data-count');
+            const wrap = document.getElementById('wrap-select').value;
+            const ribbon = document.getElementById('ribbon-select').value;
+
+            const item = {
+                name: `แพ็กเกจพรีออเดอร์ ดอกไม้ ${count} ดอก`,
+                price: price,
+                wrap: wrap,
+                ribbon: ribbon,
+                id: Date.now()
+            };
+
+            cart.push(item);
+            updateCartUI();
+            document.getElementById('cart-sidebar').classList.add('open');
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const container = document.getElementById('cart-items-list');
+            container.innerHTML = '';
+
+            if(cart.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 40px;">ไม่มีรายการพรีออเดอร์ในตะกร้า</p>';
+                return;
+            }
+
+            cart.forEach(item => {
+                const el = document.createElement('div');
+                el.classList.add('cart-item');
+                el.innerHTML = `
+                    <strong style="font-weight: 500;">${item.name}</strong>
+                    <div style="font-size:12px; color:var(--text-muted); margin: 6px 0;">ห่อ: ${item.wrap} | โบว์: ${item.ribbon}</div>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-weight:600; font-family: 'Inter', sans-serif;">${item.price} ฿</span>
+                        <button class="remove-item" onclick="removeFromCart(${item.id})">ลบออก</button>
+                    </div>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        function checkoutToInstagram() {
+            if(cart.length === 0) {
+                alert('ยังไม่มีรายการพรีออเดอร์คัดเลือกไว้ค่ะ');
+                return;
+            }
+            let text = "สวัสดีค่ะ สนใจพรีออเดอร์ดอกไม้ตามรายการนี้ค่ะ:\n\n";
+            cart.forEach((item, i) => {
+                text += `${i+1}. ${item.name}\n   [วัสดุห่อ: ${item.wrap} | โบว์: ${item.ribbon}] - ราคา ${item.price}฿\n`;
+            });
+            
+            navigator.clipboard.writeText(text).then(() => {
+                alert('คัดลอกรายละเอียดข้อมูลพรีออเดอร์เรียบร้อย! ระบบจะพาคุณไปยังหน้า DM Instagram เพื่อวางข้อความและสั่งซื้อค่ะ');
+                window.open('https://instagram.com/paper.flo.wers', '_blank');
+            });
+        }
+    </script>
+</body>
+</html>
