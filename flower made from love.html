@@ -99,7 +99,7 @@
             background-color: var(--brand-pink);
         }
 
-        /* Hero Section (Split Layout for Portrait Image & Left-aligned Text) */
+        /* Hero Section */
         .hero {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
@@ -200,7 +200,7 @@
 
         /* Pre-order Configurator Box */
         .preorder-box {
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
             background: var(--white);
             border-radius: var(--radius-smooth);
@@ -218,6 +218,7 @@
             .hero-content h1 { font-size: 40px; }
             .hero-image-side { height: 450px; }
             .preorder-box { grid-template-columns: 1fr; padding: 25px; gap: 30px; }
+            .preview-grid { grid-template-columns: 1fr !important; }
         }
 
         .preorder-img-side {
@@ -246,6 +247,115 @@
             transition: var(--transition); 
         }
         .form-group select:focus { border-color: var(--text-dark); }
+
+        /* อัปเดตส่วนแสดงภาพตัวเลือกกระดาษและริบบิ้นในหน้าสั่งซื้อ */
+        .options-preview-container {
+            grid-column: span 2;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+            margin-top: 10px;
+        }
+        .options-preview-container h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .preview-item {
+            background: var(--pastel-blue);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        .preview-item p {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 10px 14px;
+            background: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+        .preview-img-wrapper {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+        }
+        .preview-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .preview-img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+        .preview-img-wrapper::after {
+            content: '\f00e';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 50%;
+            font-size: 14px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .preview-img-wrapper:hover::after {
+            opacity: 1;
+        }
+
+        /* Lightbox โหมดซูมดูรูปภาพแบบโมเดิร์น */
+        .lightbox {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(26, 29, 32, 0.9);
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 6px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: scale(0.95);
+            transition: var(--transition);
+        }
+        .lightbox.active img {
+            transform: scale(1);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 25px; right: 35px;
+            color: var(--white);
+            font-size: 35px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
 
         .price-display { margin: 25px 0; border-top: 1px solid var(--border-color); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; }
         .price-display span { font-size: 14px; color: var(--text-muted); font-weight: 500; }
@@ -388,7 +498,7 @@
             <a href="#preorder-section" class="btn-hero-action">View Packages</a>
         </div>
         <div class="hero-image-side">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='700' viewBox='0 0 500 700'><rect width='100%' height='100%' fill='%23FFF0F3'/><text x='50%' y='50%' font-family='sans-serif' font-size='20' fill='%23FFAABC' text-anchor='middle'>[ Hero Portrait Image ]</text></svg>" alt="Featured Bouquet">
+            <img src="https://cdn.phototourl.com/free/2026-06-01-7ef0b0dc-7115-4980-857a-32065c29e89d.png" alt="Featured Bouquet">
         </div>
     </section>
 
@@ -400,7 +510,7 @@
 
         <div class="preorder-box">
             <div class="preorder-img-side">
-                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><rect width='100%' height='100%' fill='%23EAF4F8'/><text x='50%' y='50%' font-family='sans-serif' font-size='16' fill='%2390E0EF' text-anchor='middle'>[ Package Image ]</text></svg>" alt="Preorder Package">
+                <img src="https://cdn.phototourl.com/free/2026-06-01-78bc39cc-f13f-410a-9e63-69986372a428.jpg" alt="Preorder Package">
             </div>
             <div class="preorder-form">
                 <h3>Configure Order</h3>
@@ -442,6 +552,28 @@
 
                 <button class="btn-submit" onclick="addPreorderToCart()">Add To Order List</button>
             </div>
+
+            <div class="options-preview-container">
+                <h4><i class="fa-solid fa-palette" style="color: var(--brand-pink);"></i> แคตตาล็อกสำหรับช่วยเลือกวัสดุ (คลิกเพื่อขยายดูรูปใหญ่)</h4>
+                <div class="preview-grid">
+                    
+                    <div class="preview-item">
+                        <p><i class="fa-solid fa-flower"></i> แบบดอกไม้ & สีกระดาษห่อทั้งหมด</p>
+                        <div class="preview-img-wrapper" onclick="openLightbox('https://cdn.phototourl.com/free/2026-06-01-012b2bdf-9b1c-4dc2-9bd5-ebec70723972.jpg')">
+                            <img src="https://cdn.phototourl.com/free/2026-06-01-012b2bdf-9b1c-4dc2-9bd5-ebec70723972.jpg" alt="Catalog Flower and Wraps">
+                        </div>
+                    </div>
+
+                    <div class="preview-item">
+                        <p><i class="fa-solid fa-ribbon"></i> ประเภทและเฉดสีของโบว์ริบบิ้น</p>
+                        <div class="preview-img-wrapper" onclick="openLightbox('https://cdn.phototourl.com/free/2026-06-01-6b13cadf-d356-44a4-8aab-eeb882c6c875.jpg')">
+                            <img src="https://cdn.phototourl.com/free/2026-06-01-6b13cadf-d356-44a4-8aab-eeb882c6c875.jpg" alt="Catalog Ribbon Options">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -455,7 +587,7 @@
             <div class="product-card">
                 <div class="product-img-box">
                     <span class="badge-custom">Custom Design</span>
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='500' viewBox='0 0 400 500'><rect width='100%' height='100%' fill='%23FFF0F3'/><text x='50%' y='50%' font-family='sans-serif' font-size='16' fill='%23FFAABC' text-anchor='middle'>[ Custom Pink Star Image ]</text></svg>" alt="ช่อดาวพรีเมียมสีชมพู">
+                    <img src="https://cdn.phototourl.com/free/2026-06-01-e8e0966a-8f28-4c4c-bfc6-3a8440803c01.jpg" alt="ช่อดาวพรีเมียมสีชมพู">
                 </div>
                 <div class="product-info">
                     <h3>ช่อดาวพรีเมียมสีชมพู-เงิน</h3>
@@ -467,7 +599,7 @@
             <div class="product-card">
                 <div class="product-img-box">
                     <span class="badge-custom">Custom Design</span>
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='500' viewBox='0 0 400 500'><rect width='100%' height='100%' fill='%23EAF4F8'/><text x='50%' y='50%' font-family='sans-serif' font-size='16' fill='%2390E0EF' text-anchor='middle'>[ Custom Galaxy Star Image ]</text></svg>" alt="ช่อดาว Galaxy">
+                    <img src="https://cdn.phototourl.com/free/2026-06-01-dd7c60d9-1b13-43d0-b1b5-40928d8b3c18.jpg" alt="ช่อดาว Galaxy">
                 </div>
                 <div class="product-info">
                     <h3>ช่อดาว Galaxy ม่วง-ดำ</h3>
@@ -510,6 +642,11 @@
         </div>
     </div>
 
+    <div class="lightbox" id="image-lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close">&times;</button>
+        <img id="lightbox-img" src="" alt="Enlarged Preview" onclick="event.stopPropagation()">
+    </div>
+
     <footer>
         <div class="footer-logo">Paper<span>flowers</span></div>
         <p style="margin-bottom: 20px; font-size: 14px; color: var(--text-muted);">The flowers made from love...</p>
@@ -526,6 +663,18 @@
         function calculatePrice() {
             const price = document.getElementById('quantity-select').value;
             document.getElementById('total-amount-view').innerText = price + " ฿";
+        }
+
+        // ระบบสั่งเปิด-ปิด Lightbox ซูมรูปภาพแบบโมเดิร์น
+        function openLightbox(url) {
+            const lightbox = document.getElementById('image-lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = url;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('image-lightbox').classList.remove('active');
         }
 
         function addPreorderToCart() {
