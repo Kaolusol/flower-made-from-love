@@ -520,6 +520,15 @@
         .deposit-row:last-child { margin-bottom: 0; }
         .remove-item { color: #E63946; cursor: pointer; background: none; border: none; font-size: 12px; margin-top: 8px; font-weight: 500;}
 
+        /* สรุปยอดรวมท้ายตะกร้า */
+        .cart-summary-total {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+        }
+
         .checkout-btn {
             width: 100%;
             background-color: var(--text-dark);
@@ -579,8 +588,8 @@
                 <h3>Configure Order</h3>
 
                 <div class="form-group">
-                    <label>จำนวนดอกไม้ที่ต้องการสั่งทำ <span id="free-shipping-tag" class="shipping-badge">ส่งฟรี!</span></label>
-                    <input type="number" id="quantity-input" value="1" min="1" step="1" oninput="calculatePrice()">
+                    <label>จำนวนดอกไม้ที่ต้องการสั่งทำ (ไม่เกิน 100,000 ดอก) <span id="free-shipping-tag" class="shipping-badge">ส่งฟรี!</span></label>
+                    <input type="number" id="quantity-input" value="1" min="1" max="100000" step="1" oninput="calculatePrice()">
                 </div>
 
                 <div class="form-group">
@@ -717,6 +726,20 @@
         <div class="cart-items-list" id="cart-items-list">
             <p style="text-align: center; color: var(--text-muted); margin-top: 40px;">ไม่มีรายการพรีออเดอร์ในตะกร้า</p>
         </div>
+        
+        <div id="cart-total-summary-box" style="display: none;">
+            <div class="cart-summary-total">
+                <div class="deposit-row" style="font-size: 14px; margin-bottom: 6px;">
+                    <span>จำนวนดอกไม้รวมทั้งสิ้น:</span><strong id="summary-total-count">0 ดอก</strong>
+                </div>
+                <div class="deposit-row" style="font-size: 15px; margin-bottom: 6px; color: var(--text-dark);">
+                    <span>ราคารวมทั้งออเดอร์:</span><strong id="summary-total-price">0 ฿</strong>
+                </div>
+                <div id="summary-deposit-row-block">
+                    </div>
+            </div>
+        </div>
+
         <div class="cart-footer">
             <button class="checkout-btn" onclick="checkoutToInstagram()">Copy Info & Order via DM</button>
         </div>
@@ -754,6 +777,12 @@
             const inputEl = document.getElementById('quantity-input');
             let count = parseInt(inputEl.value);
             
+            // ป้องกันการกรอกตัวเลขเกิน 100,000 ในขณะที่ลูกค้ากำลังพิมพ์
+            if (count > 100000) {
+                inputEl.value = 100000;
+                count = 100000;
+            }
+
             if (isNaN(count) || count < 1) {
                 count = 1;
             }
@@ -789,27 +818,25 @@
                 return;
             }
 
+            // ตรวจสอบเช็คเงื่อนไขสูงสุดไม่เกิน 100,000 ดอกตอนกดส่งเข้าตะกร้า
+            if (count > 100000) {
+                alert('ขออภัยด้วยนะคะ สตูดิโอจำกัดการสั่งซื้อสูงสุดไม่เกิน 100,000 ดอกต่อครั้งค่ะ');
+                inputEl.value = 100000;
+                calculatePrice();
+                return;
+            }
+
             const price = getCalculatedPrice(count);
             const style = document.getElementById('style-select').value;
             const wrap = document.getElementById('wrap-select').value;
             const ribbon = document.getElementById('ribbon-select').value;
             const paymentChannel = document.querySelector('input[name="payment-channel"]:checked').value;
 
-            let depositPrice = 0;
-            let remainingPrice = price;
-
-            if (count > 1) {
-                depositPrice = Math.round(price / 2);
-                remainingPrice = price - depositPrice;
-            }
-
             const item = {
                 name: `แพ็กเกจพรีออเดอร์ ดอกไม้ ${count} ดอก`,
                 count: count,
                 price: price,
                 style: style,
-                depositPrice: depositPrice,
-                remainingPrice: remainingPrice,
                 wrap: wrap,
                 ribbon: ribbon,
                 paymentChannel: paymentChannel,
@@ -829,44 +856,64 @@
         function updateCartUI() {
             document.getElementById('cart-count').innerText = cart.length;
             const container = document.getElementById('cart-items-list');
+            const totalSummaryBox = document.getElementById('cart-total-summary-box');
             container.innerHTML = '';
 
             if(cart.length === 0) {
                 container.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 40px;">ไม่มีรายการพรีออเดอร์ในตะกร้า</p>';
+                totalSummaryBox.style.display = 'none';
                 return;
             }
 
+            // คำนวณหาจำนวนดอกไม้รวมทั้งหมดในตะกร้า
+            let totalFlowersInCart = 0;
+            let totalPriceInCart = 0;
+            cart.forEach(item => {
+                totalFlowersInCart += item.count;
+                totalPriceInCart += item.price;
+            });
+
+            // อัปเดตข้อมูลกล่องสรุปยอดรวมด้านล่าง
+            totalSummaryBox.style.display = 'block';
+            document.getElementById('summary-total-count').innerText = `${totalFlowersInCart.toLocaleString()} ดอก`;
+            document.getElementById('summary-total-price').innerText = `${totalPriceInCart.toLocaleString()} ฿`;
+            
+            const depositRowBlock = document.getElementById('summary-deposit-row-block');
+            depositRowBlock.innerHTML = '';
+
+            let isFreeDeposit = (totalFlowersInCart === 1);
+
+            if (isFreeDeposit) {
+                depositRowBlock.innerHTML = `
+                    <div class="deposit-row" style="color: #2b9348; font-weight: 500;">
+                        <span>ยอดมัดจำ:</span><strong>ไม่ต้องมัดจำ จ่ายเต็มตอนรับของ</strong>
+                    </div>
+                `;
+            } else {
+                let totalDeposit = Math.round(totalPriceInCart * 0.5);
+                let totalRemaining = totalPriceInCart - totalDeposit;
+                depositRowBlock.innerHTML = `
+                    <div class="deposit-row" style="color: #E63946; font-weight: 500; margin-bottom: 4px;">
+                        <span>ยอดมัดจำรวม (50%):</span><strong>${totalDeposit.toLocaleString()} ฿</strong>
+                    </div>
+                    <div class="deposit-row" style="color: var(--text-muted); font-weight: 500;">
+                        <span>ยอดค้างชำระตอนรับของ:</span><strong>${totalRemaining.toLocaleString()} ฿</strong>
+                    </div>
+                `;
+            }
+
+            // เรนเดอร์รายการสินค้าแต่ละชิ้นขึ้นมาแสดง
             cart.forEach(item => {
                 const el = document.createElement('div');
                 el.classList.add('cart-item');
                 
-                let depositHtml = '';
-                if (item.count === 1) {
-                    depositHtml = `
-                        <div class="deposit-info-box" style="border-color: #90E0EF; background-color: var(--pastel-blue);">
-                            <div class="deposit-row"><span>ราคารวมทั้งหมด:</span><strong>${item.price} ฿</strong></div>
-                            <div class="deposit-row" style="color: #2b9348;"><span>มัดจำ:</span><strong>ไม่ต้องมัดจำ (จ่ายเต็มตอนรับของ)</strong></div>
-                        </div>
-                    `;
-                } else {
-                    depositHtml = `
-                        <div class="deposit-info-box">
-                            <div class="deposit-row"><span>ราคารวมทั้งหมด:</span><strong>${item.price} ฿</strong></div>
-                            <div class="deposit-row" style="color: #E63946;"><span>มัดจำ (50%):</span><strong>${item.depositPrice} ฿</strong></div>
-                            <div class="deposit-row" style="color: var(--text-muted);"><span>ค้างจ่ายตอนรับของ:</span><strong>${item.remainingPrice} ฿</strong></div>
-                        </div>
-                    `;
-                }
-
-                // ปรับหน้า UI สรุปรายการ เรียงจำนวนดอกไม้ขึ้นเป็นหัวข้อหลัก
                 el.innerHTML = `
                     <strong style="font-weight: 500; color: var(--text-dark);">${item.name}</strong>
                     <div style="font-size:12px; color:var(--text-muted); margin: 4px 0 2px 0;">แบบดอกไม้: ${item.style}</div>
-                    <div style="font-size:12px; color:var(--text-muted); margin-bottom: 4px;">ห่อ: ${item.wrap} | โบว์: ${item.ribbon}</div>
-                    <div style="font-size:12px; color:var(--text-dark); font-weight:500; margin-bottom: 8px;"><i class="fa-solid fa-credit-card"></i> ช่องทาง: ${item.paymentChannel}</div>
+                    <div style="font-size:12px; color:var(--text-muted); margin-bottom: 4px;">วัสดุห่อ: ${item.wrap} | โบว์: ${item.ribbon}</div>
+                    <div style="font-size:12px; color:var(--text-dark); font-weight:500; margin-bottom: 4px;"><i class="fa-solid fa-credit-card"></i> ช่องทาง: ${item.paymentChannel}</div>
+                    <div style="font-size:13px; color:var(--text-dark); font-weight:600;">ราคาชิ้นนี้: ${item.price.toLocaleString()} ฿</div>
                     
-                    ${depositHtml}
-
                     <div style="text-align: right;">
                         <button class="remove-item" onclick="removeFromCart(${item.id})">ลบออก</button>
                     </div>
@@ -883,17 +930,30 @@
             
             let text = "สวัสดีครับ/ค่ะ สนใจพรีออเดอร์ดอกไม้ออเดอร์ตามนี้เลยครับ/ค่ะ:\n\n";
 
+            // หาจำนวนดอกไม้รวม และ ยอดเงินรวม เพื่อประเมินมัดจำของทั้งออเดอร์
+            let totalFlowers = 0;
+            let totalPrice = 0;
+            cart.forEach(item => {
+                totalFlowers += item.count;
+                totalPrice += item.price;
+            });
+
+            let isFreeDeposit = (totalFlowers === 1);
+
             cart.forEach((item, i) => {
-                // ตัวฟอร์มข้อความส่ง DM: เรียงเอาจำนวนดอกไม้ขึ้นก่อน แล้วตามด้วย [แบบดอกไม้ | วัสดุห่อ | โบว์]
                 text += `${i+1}. แพ็กเกจพรีออเดอร์ ดอกไม้ ${item.count} ดอก\n`;
                 text += `   [แบบดอกไม้: ${item.style} | วัสดุห่อ: ${item.wrap} | โบว์: ${item.ribbon}]\n`;
                 text += `   - ราคารวม: ${item.price}฿\n`;
                 
-                if (item.count === 1) {
+                // หากทั้งออเดอร์มีแค่ 1 ดอก ชิ้นนั้นจะไม่ต้องมัดจำ
+                if (isFreeDeposit) {
                     text += `   - ยอดมัดจำ: ไม่ต้องมัดจำ จ่ายเต็มตอนรับของ\n`;
                 } else {
-                    text += `   - ยอดมัดจำ 50% ที่พร้อมโอน: ${item.depositPrice}฿\n`;
-                    text += `   - ยอดค้างชำระตอนรับของ: ${item.remainingPrice}฿\n`;
+                    // หากทั้งออเดอร์มีมากกว่า 1 ดอก ทุกชิ้นจะถูกแจกแจงคิดมัดจำ 50% เป็นรายไอเทมเพื่อให้ตรวจสอบง่าย
+                    let itemDeposit = Math.round(item.price * 0.5);
+                    let itemRemaining = item.price - itemDeposit;
+                    text += `   - ยอดมัดจำ 50% ที่พร้อมโอน: ${itemDeposit}฿\n`;
+                    text += `   - ยอดค้างชำระตอนรับของ: ${itemRemaining}฿\n`;
                 }
                 
                 text += `   (เลือกชำระแบบ: ${item.paymentChannel})\n\n`;
@@ -902,7 +962,7 @@
             text += "รบกวนส่ง QR code สำหรับชำระเงินให้หน่อยนะครับ/คะ";
             
             navigator.clipboard.writeText(text).then(() => {
-                alert('คัดลอกรายละเอียดข้อมูลตามลำดับที่ต้องการสำเร็จ! ระบบจะพาท่านไปยังหน้า DM Instagram ทันทีครับ');
+                alert('ระบบจำกัดจำนวนสั่งซื้อสูงสุดไม่เกิน 100,000 ดอก และคัดลอกข้อความให้เรียบร้อยแล้วครับ!');
                 window.open('https://instagram.com/paper.flo.wers', '_blank');
             });
         }
