@@ -427,20 +427,23 @@
             transform: scale(1.05); 
         }
         
+        /* แก้ไขบั๊กตัวอักษรแปลกปลอม เปลี่ยนเป็นแสดงคำว่า "ขยาย" เมื่อเมาส์จ่อ */
         .preview-img-wrapper::after {
-            content: '\\f00e';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
+            content: 'คลิกเพื่อขยาย';
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.75);
             color: white;
-            padding: 8px 12px;
-            border-radius: 50%;
-            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
             opacity: 0;
             transition: var(--transition);
+            pointer-events: none;
+            white-space: nowrap;
         }
         
         .preview-img-wrapper:hover::after { 
@@ -624,11 +627,10 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         
-        /* ปุ่มส่งสลิปหลักสีเด่นชัดใต้รูปภาพ QR Code พร้อมอนิเมชันเปิดไอจีร้าน */
         .qr-success-submit-btn {
             width: 100%;
             padding: 15px 20px;
-            background-color: #2b9348; /* สีเขียวสดใส บ่งบอกความสำเร็จในการโอนเงิน */
+            background-color: #2b9348; 
             color: var(--white);
             border: none;
             font-size: 14px;
@@ -1049,7 +1051,7 @@
         <div class="hero-content">
             <span class="tag-preorder">100% Pre-Order Studio</span>
             <h1>The flowers made <br>from <span>love...</span></h1>
-            <p>สตูดิโอดอกไม้และช่อดาวกระดาษแฮนด์เมด รังสรรค์งานตามออเดอร์อย่างประณีตแบบชิ้นต่อชิ้น มั่นใจในคุณภาพงานคราต์เพื่อส่งมอบความรู้สึกดี ๆ ในทุกโอกาสสำคัญของคุณ</p>
+            <p>สตูดิโอดอกไม้และช่อดาวกระดาษแฮนด์เมด รังสรรค์งานตามออเดอร์อย่างประณีตแบบชิ้นต่อชิ้น มั่นใจในคุณภาพงานคราฟต์เพื่อส่งมอบความรู้สึกดี ๆ ในทุกโอกาสสำคัญของคุณ</p>
             <a href="#preorder-section" class="btn-hero-action">View Packages</a>
         </div>
         <div class="hero-image-side">
@@ -1245,14 +1247,14 @@
             </div>
             
             <div class="qr-image-container">
-                <img src="https://greasy-sapphire-ptz7n0fn.edgeone.app/QR%20shop.jpg" alt="Shop QR Code Payment" id="qr-shop-img">
+                <img src="https://cdn.phototourl.com/free/2026-06-03-c965991b-5531-4486-924a-2f68efd18861.jpg" alt="Shop QR Code Payment" id="qr-shop-img">
             </div>
 
             <button class="qr-success-submit-btn" onclick="closeQRModalWithInstagram()">
                 <i class="fa-solid fa-circle-check"></i> ชำระมัดจำเสร็จสิ้น คลิกฉันเพื่อส่งสลิปและออเดอร์
             </button>
 
-            <a href="https://greasy-sapphire-ptz7n0fn.edgeone.app/QR%20shop.jpg" target="_blank" class="qr-action-btn" download="QR_Payment_Shop.jpg">
+            <a href="https://cdn.phototourl.com/free/2026-06-03-c965991b-5531-4486-924a-2f68efd18861.jpg" target="_blank" class="qr-action-btn" download="QR_Payment_Shop.jpg">
                 <i class="fa-solid fa-arrow-up-right-from-square" style="margin-right: 4px;"></i> เปิดรูป QR ในแท็บใหม่เพื่อบันทึกภาพ
             </a>
             
@@ -1486,11 +1488,11 @@
             if (hasPromptPay) {
                 text += "เดี๋ยวสักครู่จะส่งสลิปค่ามัดจำให้นะครับ/คะ";
             } else {
-                text += "รบกวนส่ง QR code สำหรับชำระค่ามัดจำให้หน่อยนะครับ/คะ";
+                text += "รบกวนส่ง QR code สำหรับชำระเงินให้หน่อยนะครับ/คะ";
             }
             
             navigator.clipboard.writeText(text).then(() => {
-                alert("คัดลอกข้อมูลรายละเอียดการสั่งซื้อสำเร็จ! หลังจากกดตกลง หน้าต่าง QR Code จะแสดงขึ้นมาเพื่อให้คุณโอนยอดมัดจำครับ/ค่ะ");
+                alert("คัดลอกข้อมูลรายละเอียดการสั่งซื้อสำเร็จ! หลังจากกดตกลง หน้าต่าง QR Code จะแสดงขึ้นมาเพื่อให้คุณโอนยอดมัดจำค่ะ");
                 document.getElementById('qr-payment-modal').classList.add('active');
             }).catch(err => {
                 console.error('System failed to execute clipboard function: ', err);
