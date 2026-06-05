@@ -369,6 +369,34 @@
             opacity: 1; 
         }
 
+        .support-alert-box {
+            margin-top: 18px;
+            background-color: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .support-alert-box i {
+            color: var(--brand-pink);
+            font-size: 15px;
+            margin-top: 3px;
+        }
+
+        .support-alert-box p {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .support-alert-box strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
         .options-preview-container {
             grid-column: span 2;
             border-top: 1px solid var(--border-color);
@@ -388,8 +416,8 @@
         
         .preview-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
         }
         
         .preview-item {
@@ -406,6 +434,9 @@
             background: var(--white);
             border-bottom: 1px solid var(--border-color);
             color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .preview-img-wrapper {
@@ -427,7 +458,6 @@
             transform: scale(1.05); 
         }
         
-        /* แก้ไขบั๊กตัวอักษรแปลกปลอม เปลี่ยนเป็นแสดงคำว่า "ขยาย" เมื่อเมาส์จ่อ */
         .preview-img-wrapper::after {
             content: 'คลิกเพื่อขยาย';
             position: absolute;
@@ -912,6 +942,17 @@
             border: 1px solid var(--border-color);
         }
 
+        .sidebar-support-box {
+            background-color: #fafafa;
+            border: 1px dashed #ced4da;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-bottom: 15px;
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
         .checkout-btn {
             width: 100%;
             background-color: var(--text-dark);
@@ -1055,7 +1096,7 @@
             <a href="#preorder-section" class="btn-hero-action">View Packages</a>
         </div>
         <div class="hero-image-side">
-            <img src="https://cdn.phototourl.com/free/2026-06-01-7ef0b0dc-7115-4980-857a-32065c29e89d.png" alt="Featured Bouquet">
+            <img src="https://cdn.phototourl.com/free/2026-06-05-493d362d-1096-46ea-9df2-89d91b555006.jpg" alt="Featured Bouquet">
         </div>
     </section>
 
@@ -1125,6 +1166,11 @@
                 </div>
 
                 <button class="btn-submit" onclick="addPreorderToCart()">Add To Order List</button>
+
+                <div class="support-alert-box">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <p>หากคุณลูกค้าพบปัญหาในการใช้งานเว็บไซต์ หรือมีข้อสอบถามเพิ่มเติม สามารถติดต่อทางสตูดิโอได้ที่เบอร์โทรศัพท์ <strong>081-795-3821</strong> ยินดีให้บริการครับ/ค่ะ</p>
+                </div>
             </div>
 
             <div class="options-preview-container">
@@ -1132,16 +1178,23 @@
                 <div class="preview-grid">
                     
                     <div class="preview-item">
-                        <p><i class="fa-solid fa-flower"></i> แบบดอกไม้ & สีกระดาษห่อทั้งหมด</p>
-                        <div class="preview-img-wrapper" onclick="openLightbox('https://cdn.phototourl.com/free/2026-06-01-012b2bdf-9b1c-4dc2-9bd5-ebec70723972.jpg')">
-                            <img src="https://cdn.phototourl.com/free/2026-06-01-012b2bdf-9b1c-4dc2-9bd5-ebec70723972.jpg" alt="Catalog Flower and Wraps">
+                        <p><i class="fa-solid fa-seedling"></i> แคตตาล็อกเลือกดอกไม้</p>
+                        <div class="preview-img-wrapper" onclick="openLightbox('https://cdn.phototourl.com/free/2026-06-05-0c4e4eb5-0566-486f-b0af-47146d70c181.png')">
+                            <img src="https://cdn.phototourl.com/free/2026-06-05-0c4e4eb5-0566-486f-b0af-47146d70c181.png" alt="Catalog Flower Options">
                         </div>
                     </div>
 
                     <div class="preview-item">
-                        <p><i class="fa-solid fa-ribbon"></i> ประเภทและเฉดสีของโบว์ริบบิ้น</p>
-                        <div class="preview-img-wrapper" onclick="openLightbox('https://cdn.phototourl.com/free/2026-06-01-6b13cadf-d356-44a4-8aab-eeb882c6c875.jpg')">
-                            <img src="https://cdn.phototourl.com/free/2026-06-01-6b13cadf-d356-44a4-8aab-eeb882c6c875.jpg" alt="Catalog Ribbon Options">
+                        <p><i class="fa-solid fa-scroll"></i> แคตตาล็อกเลือกช่อกระดาษ</p>
+                        <div class="preview-img-wrapper" onclick="openLightbox('https://cdn.phototourl.com/free/2026-06-05-e383baa7-c3e6-4763-8509-32ef3813d180.jpg')">
+                            <img src="https://cdn.phototourl.com/free/2026-06-05-e383baa7-c3e6-4763-8509-32ef3813d180.jpg" alt="Catalog Paper Wrap Options">
+                        </div>
+                    </div>
+
+                    <div class="preview-item">
+                        <p><i class="fa-solid fa-ribbon"></i> แคตตาล็อกเลือกริบบิ้น</p>
+                        <div class="preview-img-wrapper" onclick="openLightbox('https://cdn.phototourl.com/free/2026-06-05-d1270df4-3ea4-4cd7-9d8a-423b7507d760.jpg')">
+                            <img src="https://cdn.phototourl.com/free/2026-06-05-d1270df4-3ea4-4cd7-9d8a-423b7507d760.jpg" alt="Catalog Ribbon Options">
                         </div>
                     </div>
 
@@ -1226,6 +1279,9 @@
         </div>
 
         <div class="cart-footer">
+            <div class="sidebar-support-box">
+                <i class="fa-solid fa-phone" style="margin-right: 4px; color: var(--brand-pink);"></i> พบปัญหาการใช้งานเว็บ/สั่งซื้อ โทร: 081-795-3821
+            </div>
             <button class="checkout-btn" onclick="checkoutToInstagram()">Copy Info & Order via DM</button>
         </div>
     </div>
@@ -1484,8 +1540,9 @@
                 text += `   (เลือกชำระแบบ: ${item.paymentChannel})\n\n`;
             });
             
-            // เช็กเงื่อนไขแสดงคำลงท้ายตามที่กำหนด
-            if (hasPromptPay) {
+            if (isFreeDeposit) {
+                text += "ออเดอร์นี้ไม่มีค่ามัดจำครับ/ค่ะ รบกวนตรวจสอบคิวให้หน่อยนะครับ/คะ";
+            } else if (hasPromptPay) {
                 text += "เดี๋ยวสักครู่จะส่งสลิปค่ามัดจำให้นะครับ/คะ";
             } else {
                 text += "รบกวนส่ง QR code สำหรับชำระเงินให้หน่อยนะครับ/คะ";
