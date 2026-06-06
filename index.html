@@ -1305,14 +1305,14 @@
             </div>
             
             <div class="qr-image-container">
-                <img src="https://cdn.phototourl.com/free/2026-06-03-c965991b-5531-4486-924a-2f68efd18861.jpg" alt="Shop QR Code Payment" id="qr-shop-img">
+                <img src="https://cdn.phototourl.com/free/2026-06-06-e4c13c56-4a93-437b-a93e-176ca9ab474f.jpg" alt="Shop QR Code Payment" id="qr-shop-img">
             </div>
 
             <button class="qr-success-submit-btn" onclick="closeQRModalWithInstagram()">
                 <i class="fa-solid fa-circle-check"></i> ชำระมัดจำเสร็จสิ้น คลิกฉันเพื่อส่งสลิปและออเดอร์
             </button>
 
-            <a href="https://cdn.phototourl.com/free/2026-06-03-c965991b-5531-4486-924a-2f68efd18861.jpg" target="_blank" class="qr-action-btn" download="QR_Payment_Shop.jpg">
+            <a href="https://cdn.phototourl.com/free/2026-06-06-e4c13c56-4a93-437b-a93e-176ca9ab474f.jpg" target="_blank" class="qr-action-btn" download="QR_Payment_Shop.jpg">
                 <i class="fa-solid fa-arrow-up-right-from-square" style="margin-right: 4px;"></i> เปิดรูป QR ในแท็บใหม่เพื่อบันทึกภาพ
             </a>
             
@@ -1507,7 +1507,7 @@
 
         function checkoutToInstagram() {
             if(cart.length === 0) {
-                alert('ยังไม่มีรายการในตระกร้าครับ/ค่ะ');
+                alert('ยังไม่มีรายการในตะกร้าครับ/ค่ะ');
                 return;
             }
             
@@ -1551,7 +1551,7 @@
             }
             
             navigator.clipboard.writeText(text).then(() => {
-                alert("คัดลอกข้อมูลรายละเอียดการสั่งซื้อสำเร็จ! หลังจากกดตกลง หน้าต่าง QR Code จะแสดงขึ้นมาเพื่อให้คุณโอนยอดมัดจำค่ะ");
+                alert("คัดลอกข้อมูลรายละเอียดการสั่งซื้อสำเร็จ! หลังจากกดตกลง หน้าต่าง QR Code จะแสดงขึ้นมาเพื่อให้คุณโอนยอดมัดจำครับ/ค่ะ");
                 document.getElementById('qr-payment-modal').classList.add('active');
             }).catch(err => {
                 console.error('System failed to execute clipboard function: ', err);
